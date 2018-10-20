@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- head.html; common header items for all layouts -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
+<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jquerymobile/1.4.5/jquery.mobile.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquerymobile/1.4.5/jquery.mobile.min.js"></script>
+<link rel="stylesheet" href="/site.css" />
+
+<script type="text/javascript"
+    src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+<script src="/site.js"></script>
+
+    <title>lab03 - Turtle Graphics: Basic shapes - </title>
+  </head>
+    <body id="page-top">
+      <div id="container" data-role="page">
+      <div data-role="header" class="header">
+  <nav data-role="navbar" data-grid-"d">
+  <ul>
+    <li><a href="https://ucsb-cs8.github.io">UCSB CS8 </a></li>
+    <li><a href="/" class="ui-btn-active">CS8 F17 Mirza</a></li>
+     <li><a href="https://submit.cs.ucsb.edu">submit.cs</a></li>
+  </ul>
+ </nav>
+ <nav data-role="navbar" data-grid-"d">
+  <ul>
+   <li><a href="https://gauchospace.ucsb.edu/courses/course/view.php?id=19592">Gauchospace</a></li>
+   <li><a href="https://gradescope.com">Gradescope</a></li>
+    <li><a href="https://piazza.com/class/j893pbxd4t06az?cid=1">Piazza</a></li>
+  </ul>
+ </nav>
+ 
+</div>
+
+        <div id="content"  class="ui-content">
+          <h1>lab03 : Turtle Graphics: Basic shapes</h1>
+          <table class="asn_table">
+            <!-- asn_table_header_row.html -->
+<tr>
+  <th class="asn_num"  >num</th>
+  <th class="asn_ready">ready?</th>
+  <th class="asn_desc" >description</th>
+  <th class="asn_date" >assigned</th>
+  <th class="asn_date" >due</th>
+</tr>
+
+
+            
+            <tr class="ready" >
+  <td class="asn_num"  ><a href="/lab/lab03/" data-ajax="false">lab03</a></td>
+  <td class="asn_ready">true</td>
+  <td class="asn_desc" >Turtle Graphics: Basic shapes</td>
+  <td class="asn_date" >Tue 10/17 08:00AM</td> 
+  <td class="asn_date" >Tue 10/24 05:00PM</td>
+</tr>
+
+
+
+          </table>
+          <h1 id="goal">Goal</h1>
+
+<p>The goal of this exercise is to practice with Turtle Graphics in
+Python by producing somewhere between three and six Python functions
+that use Turtle Graphics to make particular shapes.</p>
+
+<p>(You’ll understand the reasons its “between three and six” in a
+minute.)</p>
+
+<h2 id="what-youll-be-drawing">What you’ll be drawing</h2>
+
+<p>You’ll be writing functions to produce two basic shapes: a rectangle and a triangle. Each function takes parameters that specify the size, pen color, and fill color of that shape. The drawRectangle function additionally allows us to specifiy the tilt of the rectangle relative to the x-axis in degrees. The function definitions are given below:</p>
+
+<ul>
+  <li><code class="highlighter-rouge">drawRectangle(width, height, tilt, penColor, fillColor)</code></li>
+  <li><code class="highlighter-rouge">drawTriangle(base, height,  penColor, fillColor)</code></li>
+</ul>
+
+<p>The output produced when each function is callled with specific parameter values is shown in the following figure.</p>
+
+<p><img src="basicShapes.png" alt="basicShapes" height="400px" /></p>
+
+<p>The above drawings are the result of calling either <code>drawRectangle()</code> or <code>drawTriangle()</code>. In each drawing, the turtle stamp shows the initial location and heading of the turtle right before the corresponding function is called. For example the top left drawing is the output of the following line of code, when the turtle is at the top left corner:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>drawRectangle( width = 50, height = 100, tilt = 0, penColor = "red", fillColor = "")
+</code></pre>
+</div>
+
+<p>The subsequent three drawings on the same row are the output of repeatedly moving the turtle to the right, and calling the <code>drawRectangle()</code> function changing the tilt, penColor and fillColor. The function calls and parameter values to produce these drawings are given below:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>drawRectangle( width = 50, height = 100, tilt = 20, penColor = "green", fillColor = "yellow")
+...
+drawRectangle( width = 50, height = 100, tilt = 60, penColor = "blue", fillColor = "blue")
+...
+drawRectangle( width = 50, height = 100, tilt = 90, penColor = "red", fillColor = "red")
+
+</code></pre>
+</div>
+
+<p>Similarly, the drawings on the next row are the result of repeatedly calling <strong><code>drawTriangle()</code></strong> with the following parameter values:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th><code>base</code></th>
+      <th><code>height</code></th>
+      <th><code>penColor</code></th>
+      <th><code>fillColor</code></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>50</td>
+      <td>100</td>
+      <td><code> "red" </code></td>
+      <td><code> ""</code></td>
+    </tr>
+    <tr>
+      <td>50</td>
+      <td>100/2</td>
+      <td><code> "green" </code></td>
+      <td><code> "yellow"</code></td>
+    </tr>
+    <tr>
+      <td>50</td>
+      <td>100/4</td>
+      <td><code> "red"</code></td>
+      <td><code> "red"</code></td>
+    </tr>
+    <tr>
+      <td>50</td>
+      <td>100/8</td>
+      <td><code> "blue"</code></td>
+      <td><code> "blue"</code></td>
+    </tr>
+  </tbody>
+</table>
+
+<p>In Project 1, we will use these functions to create more interesting drawings.</p>
+
+<h1 id="the-programming-part">The programming part</h1>
+
+<h2 id="step-1-create-a-lab03-directory-under-your-cs8-directory">Step 1: Create a lab03 directory under your cs8 directory</h2>
+
+<p>Create a directory called <code class="highlighter-rouge">~/cs8/lab03</code> for a file
+we are going to call <code class="highlighter-rouge">lab03.py</code>.</p>
+
+<p>To do that, use the commands below.</p>
+
+<p>(Just like last week, your prompt may not be exactly like the one shown here.  Instead of <code class="highlighter-rouge">-bash-4.2$ </code>, you might have something like <code class="highlighter-rouge">[cgaucho@cstl-15 ~]$ </code>.    The <code class="highlighter-rouge">cgaucho</code> here is your username, the <code class="highlighter-rouge">cstl-15</code> is where you are logged in, and the <code class="highlighter-rouge">~</code> is your current directory.    Don’t be distracted by this detail.)</p>
+
+<pre>-bash-4.2$ <strong>cd</strong>
+-bash-4.2$ <strong>pwd</strong>
+/<em>cs</em>/<em>student</em>/<em>yourusername</em>
+-bash-4.2$ <strong>cd cs8</strong>
+-bash-4.2$ <strong>pwd</strong>
+/<em>cs</em>/<em>student</em>/<em>yourusername</em>/cs8
+-bash-4.2$ <strong>mkdir lab03</strong>
+-bash-4.2$ <strong>cd lab03</strong>
+-bash-4.2$ <strong>pwd</strong>
+/<em>cs</em>/<em>student</em>/<em>yourusername</em>/cs8/lab03
+-bash-4.2$
+</pre>
+
+<h2 id="step-2-open-idle3-and-create-lab03py">Step 2: Open <code class="highlighter-rouge">idle3</code> and create <code class="highlighter-rouge">lab03.py</code></h2>
+
+<p>Open up <code class="highlighter-rouge">idle3</code> and select the menu option <code class="highlighter-rouge">File =&gt; New File</code> to create a new file.</p>
+
+<p>In this file, put this code (but put your name instead of “your name goes here”)</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code># lab03.py, your name goes here
+import turtle
+
+t = turtle.Turtle()
+
+</code></pre>
+</div>
+
+<p>You can name your turtle anything you like; I used <code class="highlighter-rouge">t</code> because it’s short to type.</p>
+
+<p>Optionally, you can make your turtle look like a turtle by typing this:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>t.shape("turtle")
+</code></pre>
+</div>
+
+<p>And you can set your turtle to move at the fastest possible speed on the screen - which will help make your drawings as quickly as possible.</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>t.speed(0)
+</code></pre>
+</div>
+<p>Also, you can change the pen width to make your drawings look more prominent</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>t.width(4)
+</code></pre>
+</div>
+
+<p>Save this, and run it.   You should see a turtle appear. The turtle is not moving because we haven’t given it instructions to move.</p>
+
+<h2 id="step-3-create-a-function-for-drawing-a-rectangle">Step 3: Create a function for drawing a rectangle</h2>
+
+<p>Next, you are going to define a function to draw a rectangle. Your final function will be names drawRectangle() but before you implement that, we will implement a couple of different versions of that function with simpler specifications.</p>
+
+<p>Below is the first version of the function. It doesn’t take any parameters, instead it draws a rectangle with a fixed width (50), a fixed height (100), a fixed orientation (0 degrees with respect to the x-axis). To write the code we should first come up with a plan, a sequence of steps or algorithm (CS speak). Here is a very simple algorithm: Orient the turtle to point right at 0 degrees with respect to the x-axis. Move the turtle forward by 50 units, turn the turtle left by 90 degrees, move the turtle forward by 100 units, turn left 90 degrees, move forward by 50 units, turn left by 90, move forward by 100…(we are repeating ourselves, but that’s fine for now. In later labs we will express the same algorithm in a more concise way). Here is the code that does what we just described:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>def drawRectangle_1():
+    """
+    draw a rectangle with width 50 and height 100. Use a turtle called t to create the drawing
+    """
+    t.seth(0)        # Set the initial orientation of the turtle to 0 degrees
+    t.forward(50)    # Move the turtle forward by 50 units in the direction that it was pointing
+    t.left(90)       # Turn the turtle left by 90 degrees relative to the direction it was pointing
+    t.forward(100)   # Move the turtle forward by 100 units
+    t.left(90)
+    t.forward(50)
+    t.left(90)
+    t.forward(100)
+    t.left(90)       # Make sure the turtle is oriented back to its initial orientation
+    
+</code></pre>
+</div>
+
+<p>Put this code right after the code you wrote earlier in the <tt>lab03.py</tt> file. After entering the function definition, at the bottom try a sample
+function call (<code class="highlighter-rouge">drawRectangle_1()</code>).  The
+function call should NOT be indented, just as shown in the example below.</p>
+
+<p>Try running it and see if the rectangle looks ok.  Change the first line: <code class="highlighter-rouge">t.seth(0)</code> to <code class="highlighter-rouge">t.seth(90)</code>. Save and run your code again. What changed?</p>
+
+<p>We will now update our <code class="highlighter-rouge">drawRectangle_1()</code> to draw a rectangle with a green boundary and yellow interior. To do that, write the following statement before the very first line in the body of the function:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>  t.color("green", "yellow") # Sets the pen color to green and fill color to yellow
+</code></pre>
+</div>
+
+<p>The first parameter is the pen color and the second is the fill color. To actually fill the rectangle with the specified color, you must precede the code that draws the rectangle with <code class="highlighter-rouge">t.begin_fill()</code> and follow it with <code class="highlighter-rouge">t.end_fill()</code>. Below is the complete code. Save and run it.</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>def drawRectangle_1():
+    """
+    draw a rectangle with width 50, height 100, tilt 0, pen color green and fill color yellow. Use a turtle called t to create the drawing
+    """
+    t.color("green", "yellow")
+    t.seth(0)        # Set the initial orientation of the turtle to 0 degrees
+    t.begin_fill()   
+    t.forward(50)    # Move the turtle forward by 50 units in the direction that it was pointing
+    t.left(90)       # Turn the turtle left by 90 degrees relative to the direction it was pointing
+    t.forward(100)   # Move the turtle forward by 100 units
+    t.left(90)
+    t.forward(50)
+    t.left(90)
+    t.forward(100)
+    t.left(90)       # Make sure the turtle is oriented back to its initial orientation
+    t.end_fill()
+</code></pre>
+</div>
+
+<p>Save and run it. Then call the function from the Python shell as follows:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>&gt;&gt;&gt; drawRectangle_1()
+</code></pre>
+</div>
+
+<p>This is just one possible solution. As you continue through this course, you will soon discover that there are many different ways to solve any problem. Computer Scientists almost always care about <em>correct</em> solutions that run the fastest on any computer - in fact there is a whole field within CS dedicated to finding such solutions - its the field of algorithms. Good programmers take a lot of care to express their algorithms in code in the simplest and most understandable way. We will strive towards this goal in general. For now, our goal is to come up with correct solutions.</p>
+
+<p>Below is an alternate implementation for drawing a rectangle. The algorithm is slightly different: It first computes the absolute location of the 4 corners of the rectangle and then commands the turtle to go to the four locations in a specific order. To move the turtle to any location (x,y), we will use a new turtle method: <code class="highlighter-rouge">t.goto(x, y)</code>. Here is one possible implementation of this algorithm. Name this function: drawRectangle_2. Place it below the code for <code class="highlighter-rouge">drawRectangle_1()</code>.</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>def drawRectangle_2():
+    """
+    draw a rectangle with width 50, height 100, tilt 0, pen color green and fill color yellow . Use a turtle called t to create the drawing
+    """
+
+    # Calculate the coordinates for the four corners of the rectangle
+
+    x1 = t.xcor()
+    y1 = t.ycor()
+
+    x2 = x1 + 50
+    y2 = y1
+
+    x3 = x2
+    y3 = y2 + 100
+
+    x4 = x1
+    y4 = y1 + 100
+
+    
+    t.color("green", "yellow") # set the pen and fill colors
+    t.begin_fill()
+    
+    # Command the turtle to visit the four corners in order
+    t.goto(x2, y2)
+    t.goto(x3, y3)
+    t.goto(x4, y4)
+    t.goto(x1, y1)
+    
+    t.end_fill()
+
+
+</code></pre>
+</div>
+
+<p>Save and run it. Then call the function from the Python shell as follows:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>&gt;&gt;&gt; drawRectangle_2()
+</code></pre>
+</div>
+
+<p>You should see an identical rectangle as the one drawn by <code class="highlighter-rouge">drawRectangle_1()</code>.</p>
+
+<p>Here is yet another implementation for the same algorithm used in <code class="highlighter-rouge">drawRectangle_2()</code> (You guessed correctly - a single algorithm can be implemented in different ways in code)</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>def drawRectangle_3():
+    """
+    draw a rectangle with width 50, height 100, tilt 0, pen color green and fill color yellow . Use a turtle called t to create the drawing
+    """
+
+    # Calculate the coordinates for the four corners of the rectangle
+
+    x1 = t.xcor()
+    y1 = t.ycor()
+
+    fourCorners = [(x1 + 50, y1), (x1 + 50, y1 + 100), (x1, y1 + 100), (x1, y1)]
+    
+    t.color("green", "yellow")
+    t.begin_fill()
+    
+    t.goto(fourCorners[0][0], fourCorners[0][1])
+    t.goto(fourCorners[1][0], fourCorners[1][1])
+    t.goto(fourCorners[2][0], fourCorners[2][1])
+    t.goto(fourCorners[3][0], fourCorners[3][1])
+
+    t.end_fill()
+
+
+</code></pre>
+</div>
+<p>The main difference between this version and the previous one is that we are expressing the coordinates for the four corners of the rectangle as a list of tuples. If you don’t understand the syntax, its because we haven’t covered it in class yet. Don’t worry about it, just save and run and call this function to see that it produces the same exact result as the other two.</p>
+
+<p>Refer to the <a href="https://docs.python.org/3.6/library/turtle.html">turtle documentation</a> to understand all the commands we have used so far and possible alternatives to them (like <code class="highlighter-rouge">t.goto()</code>)</p>
+
+<h2 id="step-4-implement-a-drawrectangle-function-that-is-reusable">Step 4: Implement a drawRectangle() function that is reusable</h2>
+
+<p>Now, we want to make sure that we implement a function for drawing a rectangle that is general enough:</p>
+
+<ul>
+  <li>at different heights, widths and orientation</li>
+  <li>with different pen and fill color</li>
+</ul>
+
+<p>What you need to do is to write the final version of this function that takes 5 parameters as shown below:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>def drawRectangle(width, height, tilt, penColor, fillColor):
+    """
+    draw a rectangle with a given width, height, penColor and fillColor,
+    with the current location of the turtle being the 
+    lower left corner, and the bottom side tilted by an angle tilt (specified in degrees)
+    relative to the horizontal axis. After the rectangle is drawn, the turtle should return to its original position with an orientation of 0 degrees with respect to the x-axis.
+    Use a turtle called t to create the drawing
+    """
+
+# Insert code to draw the rectangle
+drawRectangle(50, 100, 0, "red","")
+</code></pre>
+</div>
+
+<p>Write the above code below the previous function definitions. You may use the code for any of the previous versions as a starting point, although one of those versions is easier to extend to case where you want to draw a rectangle at given orientation. So, think through your algorithm for the general case and select the starting implementation that is the easiest to build on.</p>
+
+<p>Next we want to draw two rectangles at different locations. To make sure that you can do that, change the function call
+at the bottom of the file from something like this:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>drawRectangle( 50, 100, 0, "red", "") 
+</code></pre>
+</div>
+
+<p>to something like this, that draws a rectangle with a given size and color,  picks up the pen and moves to a new location,
+and then draws another rectangle with a different size and color.</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>drawRectangle( 50, 100, 0, "red", "") 
+
+
+t.seth(0)   # Set the absolute heading of the turtle to 0 degrees (pointing east)
+
+# Move the turtle right by 200 units without leaving a trail
+t.up()     
+t.forward(100)
+t.down()
+
+drawRectangle( 100, 150, 22, "green", "yellow")  
+
+</code></pre>
+</div>
+
+<p>Save and run your code to make sure you see two distinct rectangles. If one of them looks incorrect, then see if you can determine what is wrong with your code. Now place the above code within the function <code class="highlighter-rouge">drawTwoRectangles()</code>. That way the rectangles are drawn only when you call that function. Here is the final code:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>
+def drawTwoRectangles():
+    
+    drawRectangle( 50, 100, 0, "red", "") 
+
+    t.seth(0)   # Set the absolute heading of the turtle to 0 degrees (pointing east)
+
+
+    # Move the turtle right by 200 units without leaving a trail 
+    t.up()     
+    t.forward(100)  
+    t.down()
+
+    drawRectangle( 100, 150, 22, "green", "yellow") 
+   
+
+drawTwoRectangles()  # call the function to draw two rectangles of different sizes and colors
+
+</code></pre>
+</div>
+
+<p>When you run the code, you should see the following output, with the rectangles very close but not touching:</p>
+
+<p><img src="twoRects.png" alt="twoRects" height="200px" /></p>
+
+<p>If you get the above output, then you are ready to move to the next step.</p>
+
+<h2 id="step-5-add-the-function-to-draw-an-isosceles-triangle">Step 5: Add the function to draw an isosceles triangle</h2>
+
+<p>Now we are going to add two other functions: drawTriangle() and drawTwoTriangles(). The first  function should draw an <a href="https://en.wikipedia.org/wiki/Isosceles_triangle">isosceles triangle</a> given the base, height, pen color and fill color. The base of the triangle should be along the x-axis as shown in the figure on top of this page. For the drawTriangle function, you will need the trigonometric functions in the Python math module. Add a line to import the math module at the top of the file.</p>
+
+<p>Keep the code that has the actual function calls <em>at the bottom</em> of the file.  The order should be:</p>
+
+<ul>
+  <li>First, the code that imports and sets up the turtle, i.e.</li>
+</ul>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>   import turtle
+   import math
+   t = turtle.Turtle()
+   t.shape("turtle")
+   t.speed(0)
+   t.width(4)
+   
+</code></pre>
+</div>
+
+<ul>
+  <li>Second, the functions definitions for <code class="highlighter-rouge">drawRectangle</code>, <code class="highlighter-rouge">drawTriangle</code>, etc., e.g.</li>
+</ul>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>   def drawRectangle_1():
+      # code for the first version of drawing a rectangle
+
+   def drawRectangle_2():
+      # code for the second version
+
+   def drawRectangle_3():
+      # code for the third version
+
+   def drawRectangle(width, height, tilt, penColor, fillColor):
+      # code for the final version of drawing a rectangle 
+ 
+   def drawTwoRectangles():
+      # Code for drawing two rectangles is here
+
+   def drawTriangle(base, height, penColor, fillColor):
+      # Code for drawTriangle is here
+
+   def drawTwoTriangles():
+      # Code to draw two isosceles triangles of different sizes and colors
+     
+</code></pre>
+</div>
+
+<ul>
+  <li>Then, last, the section of code that calls the test functions</li>
+</ul>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>   drawTwoRectangles()   # You may comment out this line when testing your drawTriangle() function
+   drawTwoTriangles()
+   # etc ...
+   
+</code></pre>
+</div>
+
+<p>Remember, before implementing a new function, you need to come up with a plan that you can eventually turn into an algorithm (a sequence of steps to achieve the task you set out to do). Here is one possible algorithm for the drawTriangle function:</p>
+
+<ol>
+  <li>Orient the turtle at 0 degrees with respect to the x-axis</li>
+  <li>Move forward by the number of units specified by the parameter “base”</li>
+  <li>Turn left by some angle that you must calculate in advance</li>
+  <li>Move forward by the number of units corresponding to the length of one of the sides of the isosceles triangle that is not the base. You will have to calculate this as well.</li>
+  <li>Turn left by some angle that you need to calculate</li>
+  <li>Move forward by the same amount that you calculated in step 4, which should bring you back to your initial position.</li>
+  <li>Orient the turtle at 0 degrees with respect to the x-axis</li>
+</ol>
+
+<p>You can choose to go with the above algorithm or come up with your own. The above algorithm can be implemented in code using a series of <code class="highlighter-rouge">t.forward()</code> and <code class="highlighter-rouge">t.left()</code> commands. You may find this easier compared to an algorithm where you calculate the absolute coordinates of the three corners of the triangle and then use a series of goto statements. The difficulty there is just in the trignometry part and not necessarily the code. Feel free to use any algorithm that appeals to you.</p>
+
+<p>No matter which algorithm you choose, you will need to plan ahead. For example, if you choose to go with the algorithm we have provided, you have to calculate the turn angles in steps 3 and 5, as well as length of the equal sides of the isosceles triangle. Use <a href="www.google.com">Google</a> to check your trignometric formulas and use the <a href="https://docs.python.org/3/library/math.html">the Python documentation on the math module</a> to find the trigonometric functions that Python provides you. Scroll down to the section on trigonometric functions. This will allow you to translate your equations to Python expressions and assignment statements. The trig functions return the result in radians. You can use the degrees() function to convert the result from radians into degrees.</p>
+
+<p>For example, recollect the Right Triangle shown below with base ‘b’ and height ‘a’, and the length of the longest side denoted as ‘c’:</p>
+
+<p><img src="rightTriangle.png" alt="RightTriangle" height="200px" /></p>
+
+<p>You may remember from high school math that the length of the longest side ‘c’ can be computed using the Pythogorean theorm as follows:</p>
+
+<p><img src="Equation.png" alt="Equation" height="50px" /></p>
+
+<p>The above is a mathematical fact expressed as an equation. You can use this formula to <em>compute</em> the length of the longest side given the other two sides ‘a’ and ‘b’ in your Python program and assign the resulting value to a variable named ‘c’. The line of Python code that does that is as follows:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>c = math.sqrt(a**2 + b**2)     
+</code></pre>
+</div>
+<p>In the above code, to the right of the <code>=</code> sign is a Python expression that computes something. The result of the computation is assigned to the variable ‘c’ on the left. So while in a math equation its okay to switch out the expressions on the left and right hand side of the equation, doing so in Python would result in a error. Be sure you understand the difference between equations and Python assignment statements. Ask a TA/tutor for further clarification if you need to.</p>
+
+<p>Now go ahead place the following code below your other functions and the fill in the code for the drawTriangle() function:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>
+    
+def drawTriangle(base, height, penColor, fillColor):
+    """
+    draw a triangle with a given base, height, penColor and fillColor,
+    with the current location of the turtle being the 
+    lower left corner. The base of the triangle should be at 0 degrees with respect to the x-axis. 
+    Do not assume anything about the initial orientation of the turtle. 
+    The final orientation of the turtle should be 0 degrees with respect to the x-axis. 
+    Use a turtle called t to create the drawing
+    """
+
+    # Insert code to draw the triangle
+
+def drawTwoTriangles():
+    """ Draws two non overlapping triangles with different sizes and colors
+    """
+    
+
+</code></pre>
+</div>
+
+<h2 id="step-6-checking-your-code-before-submission">Step 6: Checking your code before submission</h2>
+
+<p>When you are finished with the lab, ask a TA, tutor or instructor to look it over and give you some feedback on it.</p>
+
+<p>It should be structured in a way that there is</p>
+
+<ol>
+  <li>A single file called <code class="highlighter-rouge">lab03.py</code></li>
+  <li>Code at the top of the <code class="highlighter-rouge">lab03.py</code> file that sets up a turtle</li>
+  <li>
+    <p>Next, function defintions: 
+def drawRectangle_1():</p>
+
+    <p>…</p>
+
+    <p>def drawRectangle_2():</p>
+
+    <p>…</p>
+
+    <p>def drawRectangle_3():</p>
+
+    <p>…</p>
+
+    <p>def drawRectangle(width, height, tilt, penColor, fillColor):</p>
+
+    <p>…</p>
+
+    <p>def drawTwoRectangles():</p>
+
+    <p>…</p>
+
+    <p>def drawTriangle(base, height, penColor, fillColor):</p>
+
+    <p>…</p>
+
+    <p>def drawTwoTriangles():</p>
+
+    <p>…</p>
+  </li>
+  <li>Finally, code that calls those functions to draw two non overlapping rectangles and two triangles as specified before</li>
+</ol>
+
+<p>If you code meets all those criteria, you should be in good shape to submit it.</p>
+
+<h2 id="step-7-submitting-via-submitcs">Step 7: Submitting via submit.cs</h2>
+
+<p>Note that this week, although we are using submit.cs, it is NOT the case that the grade you get from submit.cs is your final grade for the assignment.    The grade on submit.cs is just a PART of your grade–you will get 10 points for basically submitting <em>anything</em> that is a valid Python program that has the name lab03.py.   However, the other 90 points for this lab will come from an instructor or TA doing a manual inspection of your code to see if it complies with the requirements listed above.</p>
+
+<p>If you want reassurance that your code is in good shape, you may ask a TA or instructor to look it over during office hours or lab.</p>
+
+<p>To submit your code, use:</p>
+
+<h3 id="navigate-to-the-page-for-submitting-lab03">Navigate to the page for submitting lab03</h3>
+
+<p>The page for submitting lab03 is here: <a href="https://submit.cs.ucsb.edu/form/project/827/submission">https://submit.cs.ucsb.edu/form/project/827/submission</a></p>
+
+<p>Navigate to that page, and upload your <code class="highlighter-rouge">lab03.py</code> file.</p>
+
+<p>If you are working on the ECI/CSIL/lab linux systems, you can also submit at the command line with this command:</p>
+
+<p><tt>~submit/submit -p 827 ~/cs8/lab03/lab03.py</tt></p>
+
+<p>It will ask for your email address: use your full umail address (e.g. <code class="highlighter-rouge">cgaucho@umail.ucsb.edu</code>).  For password, use the password that you enter for the submit.cs system.    You may save these credentials if you don’t want to have to type them in every time.</p>
+
+<p>Note that if you try to upload a file with a name that does not match EXACTLY the name <code class="highlighter-rouge">lab03.py</code>, the system will not allow you to do it.</p>
+
+<p>Once you upload it, you should get a page that shows your submission is pending.</p>
+
+<p>Refresh that page, and you should get one that indicates with either red, or green, whether the test cases for your code passed or failed.</p>
+
+<p>If you got all green, and 10 points, then your submission was accepted—but to emphasize, for this week, the other 90 points will be assigned by a human grader.   You’ll be notified of that grade <a href="https://gauchospace.ucsb.edu">via Gauchospace</a>.</p>
+
+<p>Created by Diba Mirza</p>
+
+        </div><!-- content -->
+        <div data-role="footer" class="footer">
+ <nav data-role="navbar" data-grid-"d">
+  <ul>
+   <li><a href="https://github.com/ucsb-cs8-f17/ucsb-cs8-f17.github.io">this site on github</a></li>
+      <li><a href=''>mentor page</a></li>
+   <li><a href='https://github.com/ucsb-cs8-f17/ucsb-cs8-f17.github.io/edit/master/_lab/lab03.md'>edit this page on github</a></li>
+  </ul>
+ </nav>
+</div>
+
+      </div><!-- container -->
+  </body>
+</html>
